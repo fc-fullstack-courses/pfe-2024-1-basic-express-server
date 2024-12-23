@@ -1,16 +1,5 @@
 const express = require('express');
-const yup = require('yup');
-
-const REGISTRATION_SCHEMA = yup.object({
-  email: yup.string().email().required(),
-  password: yup
-    .string()
-    .matches(/^.{8,32}$/, 'enter valid password')
-    .required(),
-  firstName: yup.string().required(),
-  lastName: yup.string().required(),
-  age: yup.number(),
-});
+const { REGISTRATION_SCHEMA } = require('./validation/userSchemas');
 
 // app - екземпляр серверу експресса
 const app = express();
