@@ -1,24 +1,12 @@
 const express = require('express');
-const {
-  registrationValidationMW,
-  updateUserMW,
-} = require('../middlewares/usersMW');
-const UserController = require('../controllers/userController');
+const userRouter = require('./usersRouter');
+const petsRouter = require('./petsRouter');
 
 // екземпляр роутеру
 // містить ті ж методи маршрутизації що і app
-const router = express.Router();
-const bodyParser = express.json();
+const rootRouter = express.Router();
 
-router.get('/users', UserController.getUsers);
-router.get('/users/:userId', UserController.getUser);
-router.delete('/users/:userId', UserController.deleteUser);
-router.put('/users/:userId', bodyParser, updateUserMW, UserController.updateUser);
-router.post(
-  '/users',
-  bodyParser,
-  registrationValidationMW,
-  UserController.createUser
-);
+rootRouter.use(userRouter);
+rootRouter.use(petsRouter);
 
-module.exports = router;
+module.exports = rootRouter;
