@@ -1,24 +1,9 @@
 const express = require('express');
-const {
-  registrationValidationMW,
-  updateUserMW,
-} = require('./middlewares/usersMW');
-const UserController = require('./controllers/userController');
-
+const router = require('./routers');
 const app = express();
 
-const bodyParser = express.json();
-
-app.get('/users', UserController.getUsers);
-app.get('/users/:userId', UserController.getUser);
-app.delete('/users/:userId', UserController.deleteUser);
-app.put('/users/:userId', bodyParser, updateUserMW, UserController.updateUser);
-app.post(
-  '/users',
-  bodyParser,
-  registrationValidationMW,
-  UserController.createUser
-);
+// під'єднує до app на всі методи міддлвер (в даному випадку роутера)
+app.use(router);
 
 const PORT = 5000;
 
