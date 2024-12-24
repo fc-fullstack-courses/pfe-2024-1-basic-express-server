@@ -1,6 +1,6 @@
 const petsRouter = require('express').Router();
 
-petsRouter.get('/pets', (req, res) => {
+petsRouter.get('/', (req, res) => {
   res.send('array of pets');
 });
 

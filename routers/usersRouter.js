@@ -9,12 +9,12 @@ const userRouter = express.Router();
 
 const bodyParser = express.json();
 
-userRouter.get('/users', UserController.getUsers);
-userRouter.get('/users/:userId', UserController.getUser);
-userRouter.delete('/users/:userId', UserController.deleteUser);
-userRouter.put('/users/:userId', bodyParser, updateUserMW, UserController.updateUser);
+userRouter.get('/', UserController.getUsers);
+userRouter.get('/:userId', UserController.getUser);
+userRouter.delete('/:userId', UserController.deleteUser);
+userRouter.put('/:userId', bodyParser, updateUserMW, UserController.updateUser);
 userRouter.post(
-  '/users',
+  '/',
   bodyParser,
   registrationValidationMW,
   UserController.createUser

@@ -6,7 +6,7 @@ const petsRouter = require('./petsRouter');
 // містить ті ж методи маршрутизації що і app
 const rootRouter = express.Router();
 
-rootRouter.use(userRouter);
-rootRouter.use(petsRouter);
+rootRouter.use('/users', userRouter);
+rootRouter.use('/pets', petsRouter);
 
 module.exports = rootRouter;
