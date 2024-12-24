@@ -6,11 +6,11 @@ const users = [
   { id: 4, email: 'email5@gmail.com', password: 'd4354fef' },
 ];
 
-module.exports.getUsers = (request, response) => {
+module.exports.getUsers = async (request, response) => {
   response.send(users);
 };
 
-module.exports.createUser = (req, res, next) => {
+module.exports.createUser = async (req, res, next) => {
   const newUser = { ...req.user };
 
   newUser.id = Date.now();

@@ -21,20 +21,20 @@ const app = express();
 app.get(
   '/',
   // проміжний обробник запиту (міддлвер)
-  (req, res, next) => {
+  async (req, res, next) => {
     console.log('callback 1');
     req.data = { id: 5 };
     // каже що міддлвер зробив своє діло і можна викликати наступний обробник у ланцюжку
     next();
   },
   // проміжний обробник запиту (міддлвер)
-  (req, res, next) => {
+  async (req, res, next) => {
     console.log('callback 2');
     console.log(req.data.id); // 5
     next();
   },
   // проміжний обробник запиту (міддлвер)
-  (req, res, next) => {
+  async (req, res, next) => {
     console.log('callback 3');
 
     const isRequestValid = Math.random() > 0.5;
@@ -45,7 +45,7 @@ app.get(
     }
   },
   // кінцевий обробник запиту
-  (req, res, next) => {
+  async (req, res, next) => {
     console.log('callback 4');
     // метод send дозволяє повернути у відповідь стрінгу, об'єкт, масив, булеве значення без перетворень
     res.send('Hello World!');
