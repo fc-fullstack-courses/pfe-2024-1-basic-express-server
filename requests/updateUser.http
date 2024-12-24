@@ -1,0 +1,7 @@
+PUT http://localhost:5000/users/1
+Content-Type: application/json
+
+{
+  "email": "newemail12345@hotmail.com",
+  "isMale": true
+}

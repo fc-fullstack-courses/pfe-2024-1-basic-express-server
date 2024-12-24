@@ -1,9 +1,15 @@
 const express = require('express');
-const { registrationValidationMW } = require('./middlewares/usersMW');
+const {
+  registrationValidationMW,
+  updateUserMW,
+} = require('./middlewares/usersMW');
 const UserController = require('./controllers/userController');
 
 // app - екземпляр серверу експресса
 const app = express();
+
+// міддлвер який отримає json дані з запиту
+const bodyParser = express.json();
 
 // app містить функції для побудови маршрутів на сервері
 // їх назви відповідають назвам HTTP методів
@@ -55,6 +61,7 @@ app.get(
 app.get('/users', UserController.getUsers);
 app.get('/users/:userId', UserController.getUser);
 app.delete('/users/:userId', UserController.deleteUser);
+app.put('/users/:userId', bodyParser, updateUserMW, UserController.updateUser);
 
 // реєстрація користувача
 /*
@@ -65,9 +72,6 @@ app.delete('/users/:userId', UserController.deleteUser);
   5. підготувати дані юзера до відправки
   6. відправити дані у якості відповіді
 */
-
-// міддлвер який отримає json дані з запиту
-const bodyParser = express.json();
 
 app.post(
   '/users',

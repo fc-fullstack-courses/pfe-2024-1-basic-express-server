@@ -41,3 +41,29 @@ module.exports.deleteUser = async (req, res) => {
     res.send('User not exist');
   }
 }
+
+module.exports.updateUser = async (req, res) => {
+  const { user, params: {userId}} = req;
+
+  const foundUser = users.find((user) => user.id === +userId);
+
+  if(foundUser) {
+    let updatedUser;
+    users = users.map((userInDb) => {
+      if(userInDb.id === +userId) {
+        updatedUser = {
+          ...userInDb,
+          ...user
+        }
+
+        return updatedUser;
+      }
+
+      return userInDb;
+    });
+
+    res.send(updatedUser);
+  } else {
+    res.send('User not exist');
+  }
+}
