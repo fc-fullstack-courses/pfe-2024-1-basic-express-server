@@ -2,7 +2,11 @@ const express = require('express');
 const rootRouter = require('./routers');
 const app = express();
 
-// під'єднує до app на всі методи міддлвер (в даному випадку роутера)
+const bodyParser = express.json();
+// під'єднує до app на всі методи міддлвер обробки json даних
+app.use(bodyParser);
+
+// під'єднує до app на всі методи міддлвер роутера
 app.use(rootRouter);
 
 const PORT = 5000;
