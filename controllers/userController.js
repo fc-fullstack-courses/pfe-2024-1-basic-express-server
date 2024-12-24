@@ -10,6 +10,13 @@ module.exports.getUsers = async (request, response) => {
   response.send(users);
 };
 
+module.exports.getUser = async (req, res) => {
+  const { params: { userId }} = req;
+
+  const user = users.find((user) => user.id === +userId);
+  res.send(user);
+}
+
 module.exports.createUser = async (req, res, next) => {
   const newUser = { ...req.user };
 

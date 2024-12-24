@@ -53,6 +53,7 @@ app.get(
 );
 
 app.get('/users', UserController.getUsers);
+app.get('/users/:userId',UserController.getUser);
 
 // реєстрація користувача
 /*
