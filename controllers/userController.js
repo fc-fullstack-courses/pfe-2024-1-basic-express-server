@@ -1,4 +1,4 @@
-const users = [
+let users = [
   { id: 0, email: 'email1@gmail.com', password: '12345admin' },
   { id: 1, email: 'email2@gmail.com', password: 'sadsadsa' },
   { id: 2, email: 'email3@gmail.com', password: '423rfdf42d' },
@@ -27,4 +27,17 @@ module.exports.createUser = async (req, res, next) => {
   const { password, ...preparedUser } = newUser;
 
   res.send(preparedUser);
+}
+
+module.exports.deleteUser = async (req, res) => {
+  const {params: {userId}} = req;
+
+  const user = users.find((user) => user.id === +userId);
+
+  if(user) {
+    users = users.filter((user) => user.id !== +userId);
+    res.send(user);
+  } else {
+    res.send('User not exist');
+  }
 }
