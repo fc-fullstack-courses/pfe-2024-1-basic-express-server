@@ -2,7 +2,7 @@ const User = require('../models/User');
 
 module.exports.getUsers = async (request, response) => {
   const users = await User.findAll();
-  response.send(users);
+  response.status(200).send(users);
 };
 
 module.exports.getUser = async (req, res) => {
@@ -19,7 +19,7 @@ module.exports.createUser = async (req, res, next) => {
 
   const { password, ...preparedUser } = newUser;
 
-  res.send(preparedUser);
+  res.status(201).send(preparedUser);
 }
 
 module.exports.deleteUser = async (req, res) => {
@@ -29,7 +29,7 @@ module.exports.deleteUser = async (req, res) => {
     const deletedUser = await User.remove(+userId);
     res.send(deletedUser);
   } catch (error) {
-    res.send(error.message);
+    res.status(404).send(error.message);
   }
 }
 
@@ -40,6 +40,6 @@ module.exports.updateUser = async (req, res) => {
     const updatedUser = await User.updateOne(+userId, user);
     res.send(updatedUser);
   } catch (error) {
-    res.send(error.message);
+    res.status(404).send(error.message);
   }
 }

@@ -20,7 +20,7 @@ module.exports.registrationValidationMW = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    res.send(error.message);
+    res.status(400).send(error.message);
   }
 };
 
@@ -31,6 +31,6 @@ module.exports.updateUserMW = async (req, res, next) => {
     req.user = await UPDATE_USER_SCHEMA.validate(body);
     next();
   } catch (error) {
-    res.send(error.message);
+    res.status(400).send(error.message);
   }
 }
